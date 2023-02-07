@@ -1,5 +1,6 @@
 // Counter: hooks and simple state
 import React from 'react'
+import {useState} from 'react'
 
 // Normally an interactive application will need to hold state somewhere.
 // In React, you use special functions called "hooks" to do this.
@@ -64,13 +65,19 @@ import React from 'react'
 // many times the the button is clicked. The text of the button should be the
 // number of times the button has been clicked.
 
-function Counter() {
+function Counter({step = 1, initialCount = 0}) {
   // 🐨 use React.useState here
   // 🐨 create an increment function that calls the state updater you get from
   //    React.useState to increment the count
   // 🐨 render the count you get from React.useState inside the button and use
   //    your increment function as the onClick handler.
-  return <button />
+  const [count, setCount] = useState(initialCount)
+
+  return (
+    <button onClick={() => setCount(currentCount => currentCount + step)}>
+      {count}
+    </button>
+  )
 }
 
 // 💯 make the counter accept props called "step" and "initialCount" and make

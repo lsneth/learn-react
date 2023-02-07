@@ -33,14 +33,23 @@ import React from 'react'
 //   return <button onClick={increment}>{count}</button>
 // }
 
-function Counter({step = 1, initialCount = 0}) {
+function useLocalStorageState({key, initialValue, serialize, deserialize}) {
   const [count, setCount] = React.useState(() =>
-    Number(window.localStorage.getItem('count') || initialCount),
+    deserialize(window.localStorage.getItem(key) || initialValue),
   )
-  const increment = () => setCount(c => c + step)
   React.useEffect(() => {
-    window.localStorage.setItem('count', count)
-  }, [count])
+    window.localStorage.setItem(key, count)
+  }, [key, count])
+  return [count, setCount]
+}
+
+function Counter({step = 1, initialCount = 0}) {
+  const [count, setCount] = useLocalStorageState({
+    key: 'count',
+    initialValue: initialCount,
+    deserialize: v => Number(v),
+  })
+  const increment = () => setCount(c => c + step)
   return <button onClick={increment}>{count}</button>
 }
 
