@@ -1,5 +1,5 @@
 // Tic Tac Toe: Advanced State
-import React, {useEffect} from 'react'
+import React from 'react'
 import {useState} from 'react'
 
 // We're going to build tic-tac-toe! If you've gone through React's official
