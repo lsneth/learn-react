@@ -1,5 +1,5 @@
 // Making HTTP requests
-import React from 'react'
+import React, {useReducer} from 'react'
 
 // 🦉 There are lots of ways to make HTTP requests in React components. React is
 // currently working on a new feature called Suspense which is fantastic and
@@ -41,11 +41,20 @@ function FetchPokemon({pokemonName}) {
   // 🐨 Have state for the pokemon (null), the error state (null), and the
   // loading state (false). I recommend you use a reducer for this. I've given
   // you a starter reducer above because I love you.
+  const [state, dispatch] = useReducer(fetchPokemonReducer, {
+    pokemon: null,
+    error: null,
+    loading: false,
+  })
   // 🐨 Use the `fetchPokemon` function below to fetch a pokemon by its name:
-  //   fetchPokemon('Pikachu').then(
-  //     pokemon => { /* call set state with the pokemon and loading: false */},
-  //     error => {/* call set state with the error loading: false */},
-  //   )
+  fetchPokemon('Pikachu').then(
+    pokemon => {
+      /* call set state with the pokemon and loading: false */
+    },
+    error => {
+      /* call set state with the error loading: false */
+    },
+  )
 
   // 🐨 use React.useEffect where the callback should be called whenever the
   // pokemon name changes.
